@@ -1,0 +1,41 @@
+MIT License (code)
+
+Copyright (c) 2026 Martín Baca
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the code in this repository (Python scripts, Singular scripts, and other
+source code files) and associated documentation, to deal in the code without
+restriction, including without limitation the rights to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies, and to permit
+persons to whom the code is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the code.
+
+THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE CODE OR THE USE OR OTHER DEALINGS IN
+THE CODE.
+
+---
+
+CC-BY 4.0 (text and notes)
+
+All non-code content in this repository (Markdown session notes, the LaTeX
+manuscript and its compiled PDF, and any other written material) is licensed
+under the Creative Commons Attribution 4.0 International License
+(CC-BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt this material for any purpose, provided you
+give appropriate credit to Martín Baca, link to the license, and indicate if
+changes were made.
+
+---
+
+Third-party papers referenced in the manuscript (arXiv preprints, see the bibliography) retain
+the copyright and license terms of their original authors/publishers and are not covered by the
+licenses above.

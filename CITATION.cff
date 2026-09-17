@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use or reference this work, please cite it as below."
+type: software
+title: "What is the classical Regge limit for n>=5 particles? An open problem, with computational evidence from a five-photon degree-11 search"
+authors:
+  - family-names: "Baca"
+    given-names: "Martín"
+repository-code: "https://github.com/martinbacaia/crg-open-problem-n5"
+abstract: >
+  The Classical Regge Growth (CRG) conjecture is well-defined at n=4 but its generalization to
+  n>=5 particles is genuinely ambiguous, with no definition in the literature. Using the
+  five-photon operator basis of a companion note (arXiv/Zenodo: 10.5281/zenodo.22819347), this
+  note constructs three qualitatively distinct families of n=5 Regge trajectories and shows that
+  the combined kernel of degree-11 candidates satisfying the conjectured bound across all three
+  families is exactly {0}, on the complete 16-dimensional space explored. States this as an open
+  problem rather than a resolved negative result.
+keywords:
+  - string theory
+  - scattering amplitudes
+  - S-matrix
+  - Classical Regge Growth
+  - Regge limit
+license: MIT
+preferred-citation:
+  type: generic
+  title: "What is the classical Regge limit for n>=5 particles? An open problem, with computational evidence from a five-photon degree-11 search"
+  authors:
+    - family-names: "Baca"
+      given-names: "Martín"
+  year: 2026
+  notes: "Preprint, not yet peer-reviewed. See paper/crg-open-problem-n5.pdf."

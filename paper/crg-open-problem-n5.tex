@@ -1,0 +1,399 @@
+\documentclass[reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\title[What is the classical Regge limit for $n\geq5$?]{What is the classical Regge limit for
+$n\geq5$ particles? An open problem, with computational evidence from a five-photon degree-11
+search}
+
+\author{Mart\'in Baca}
+\date{}
+
+\begin{document}
+
+\begin{center}
+\fbox{\parbox{0.85\textwidth}{\centering
+\textbf{Preprint v1.0 --- not peer-reviewed.} This note reports a negative/exploratory result and
+an open problem, not a resolved theorem. Independently checked in-house (see
+Section~\ref{sec:verification}), but not yet reviewed by anyone outside this project. Feedback,
+corrections, and criticism are genuinely welcome --- please open an issue at
+\url{https://github.com/martinbacaia/crg-open-problem-n5} or contact the author.}}
+\end{center}
+
+\begin{abstract}
+The Classical Regge Growth (CRG) conjecture --- that any consistent classical $S$-matrix grows no
+faster than $s^2$ in the Regge limit $s\to\infty$ at fixed $t$ --- is well-posed and has been used
+to constrain four-particle photon and graviton $S$-matrices~\cite{cgghjm2019}. Extending this to
+$n\geq5$ particles requires a generalization of ``the Regge limit'' itself, and we show this
+generalization is genuinely ambiguous: no definition exists in the literature, and the closest
+established framework with a similar name --- multi-Regge kinematics, from the gauge-theory
+literature on multi-particle production~\cite{delduca1993} --- is motivated by different physics
+and is not obviously the correct generalization of the causality-derived CRG bound. Using the
+degree-9 and degree-11 five-photon operator basis constructed in a companion
+note~\cite{fivephotons}, we construct three qualitatively distinct, explicitly validated families
+of $n=5$ Regge trajectories and search for operators satisfying the conjectured bound. We find:
+the unique degree-9 invariant has an exact growth floor of $s^3$ within one family; a
+9-dimensional subspace of the (at-the-time) 15-dimensional degree-11 space satisfies the bound in
+that same family; a 2-dimensional subspace survives two qualitatively different families and two
+independent parameter configurations each; but a third family kills this subspace entirely, and an
+exact computation of the combined kernel across all three families, on the complete 16-dimensional
+degree-11 space (including a topology discovered after the two-family result), gives exactly
+$\{0\}$. We interpret this pattern --- four structurally different attempts to enlarge the search
+all failing in the same way --- as evidence that the obstruction is in the definition of the
+limit, not in an incomplete search, and we state this as the open problem.
+\end{abstract}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+The Classical Regge Growth (CRG) conjecture states that the tree-level $S$-matrix of any
+consistent classical theory grows no faster than $s^2$ in the Regge limit ($s\to\infty$ at fixed
+$t$)~\cite{cgghjm2019}. There is evidence for this from causality: the chaos bound in AdS/CFT,
+applied to the boundary dual of a bulk theory of scalars, gauge fields, or gravitons, implies CRG
+for the corresponding flat-space $S$-matrices~\cite{chaosbound2021}. Deriving CRG this way is
+substantial holographic technical work, well beyond the scope of this project; instead, following
+Chowdhury, Gadde, Gopalka, Halder, Janagal \& Minwalla (CGGHJM)~\cite{cgghjm2019}, we take CRG as a
+given conjecture and ask what it implies for the operator classification at $n=5$, building on the
+representation-theoretic and combinatorial foundation constructed in a companion
+note~\cite{fivephotons}.
+
+At $n=4$, ``the Regge limit'' has an unambiguous meaning: elastic $2\to2$ scattering at fixed
+momentum transfer $t$, realized physically by boosting all four momenta while correlating the
+scattering angle to keep $t$ fixed as $s\to\infty$. At $n\geq5$, there is no single kinematic
+invariant playing the role of ``$t$'', and it is not obvious a priori which invariants should be
+held fixed while which others diverge. This note's central finding is that this ambiguity is not
+merely bookkeeping: it appears to be the actual obstruction to extending the $n=4$ classification
+program to $n=5$, at least within the family of constructions we tried.
+
+\begin{remark}[Literature search]
+A direct search of the arXiv API (both for ``classical Regge growth'' specifically, and for
+follow-up work on the $n=4$ classification) turned up no paper addressing CRG at $n\geq5$; the
+follow-up literature since 2019 extends the $n=4$ story (massive spinning particles, dimensional
+reduction, the holographic chaos-bound derivation itself) but does not touch $n\geq5$. Separately,
+there is an established, decades-old, and extensively used framework called \emph{multi-Regge
+kinematics} (MRK) for $n$-point amplitudes at $n\geq5$, going back to Del
+Duca~\cite{delduca1993} and used throughout the BFKL/planar-$\mathcal{N}=4$ literature up to
+$n=7$-point amplitudes: particles are ordered by rapidity, and the limit takes all consecutive
+rapidity gaps to infinity (``strong rapidity ordering'') with transverse momenta fixed. We do
+\emph{not} adopt MRK here, for a specific reason: MRK's physical motivation is multi-particle
+production at high energy in gauge theory (an inherently different regime from the causality/chaos
+bound that motivates CRG), and nothing we are aware of establishes that MRK is the kinematic
+regime in which a chaos-bound-type causality argument would actually constrain growth to $s^2$.
+Adopting it without that justification would repeat the same error as inventing an ad hoc
+generalization, only with a citation that lends false confidence. We regard this as itself part of
+the open problem, not a solved input.
+\end{remark}
+
+\subsection*{Organization} Section~\ref{sec:n4} reviews the $n=4$ Regge limit at the level of
+explicit momenta, validated as a template. Section~\ref{sec:naive} shows a naive generalization to
+$n=5$ fails structurally. Section~\ref{sec:families} constructs three qualitatively distinct
+families of $n=5$ Regge trajectories. Section~\ref{sec:results} reports the growth rates found at
+degrees 9 and 11, culminating in the negative result on the full 16-dimensional degree-11 space.
+Section~\ref{sec:verification} summarizes the verification methodology, including several bugs
+found and fixed. Section~\ref{sec:discussion} discusses what this means and states the open
+problem.
+
+\section{The \texorpdfstring{$n=4$}{n=4} Regge limit, validated at the level of explicit momenta}
+\label{sec:n4}
+
+We work in $D=6$ throughout (consistent with~\cite{fivephotons}), with the standard realization of
+elastic $2\to2$ scattering at fixed $t$:
+\[
+p_1=-E(1,n_1),\quad p_2=-E(1,-n_1),\quad p_3=E(1,n_3),\quad p_4=E(1,-n_3),
+\]
+with $n_1,n_3$ unit spatial vectors at angle $\theta$, giving $s=4E^2\to\infty$ and
+$t=-2E^2(1-\cos\theta)$. Choosing $\cos\theta(E)=1+t_0/(2E^2)$ keeps $t=t_0$ exactly fixed as
+$E\to\infty$ ($\theta\to0$, correlated with $E\to\infty$) --- the standard forward-limit
+realization of ``$s\to\infty$ at fixed $t$''. Crucially, all four momenta participate in the
+high-energy limit; no particle is held at rest.
+
+\begin{remark}[A gauge-reference bug, instructive for $n=5$]
+\label{rem:gaugebug}
+Constructing the polarizations $\varepsilon_i$ requires a reference momentum to fix the residual
+gauge freedom (projecting a seed vector to satisfy $\varepsilon_i\cdot p_i=0$). An initial attempt
+used a ``$t$-channel partner'' as that reference (e.g.\ $p_3$ for $\varepsilon_1$) and found
+$(F^1{:}F^2)(F^3{:}F^4)$ growing as $\Lambda^5$, not the $\Lambda^4$ expected by naive degree
+counting. Diagnosis: $\eta(p_1,p_3)=-t/2$ is held \emph{fixed} by construction (it is literally the
+momentum transfer being kept constant), so using $p_3$ as a gauge reference divides by a quantity
+that does not grow, causing the transverse part of $\varepsilon_1$ to blow up spuriously. Using an
+\emph{$s$-channel partner} instead (e.g.\ $p_2$, with $\eta(p_1,p_2)=-s/2\sim E^2$) fixes this:
+after the correction, $F^1{:}F^2\sim s^{1.0000}$ and $(F^1{:}F^2)(F^3{:}F^4)\sim s^{2.0000}$,
+matching naive counting and CGGHJM's own table (2-derivative structures grow as $s$, 4-derivative
+as $s^2$). This is the first instance, in either this note or~\cite{fivephotons}, of a recurring
+lesson: in any Regge trajectory, using a ``fixed-channel'' pair as a gauge reference produces
+spurious growth unrelated to the physical $S$-matrix, and one must classify growing vs.\ fixed
+channels \emph{before} constructing explicit polarizations.
+\end{remark}
+
+\section{A naive generalization to \texorpdfstring{$n=5$}{n=5} fails structurally}
+\label{sec:naive}
+
+The obvious generalization --- boost two particles ($p_1,p_2$) along opposite null reference
+directions while holding three ``spectators'' ($p_3,p_4,p_5$) fixed --- fails for structural
+reasons, not a computational obstacle. There are two related problems, the second a sharper
+version of the same underlying obstruction:
+
+\begin{enumerate}
+\item By momentum conservation, if $p_1+p_2$ grows, at least one spectator must absorb the recoil
+and grow as well; one cannot hold $p_3+p_4+p_5$ fixed while $p_1+p_2$ diverges, since their sum
+must vanish exactly.
+\item No generic null momentum can have zero overlap with \emph{both} reference null directions
+simultaneously: a null vector with vanishing components along two independent null directions
+would live entirely in their spacelike transverse complement, where the only null vector is zero.
+Hence invariants like $s_{13}$, which one would naively want to hold fixed (as an analogue of
+$t$), necessarily grow too if $p_3$ is a generic null momentum.
+\end{enumerate}
+
+At $n=4$, the Regge limit works precisely because all four momenta participate in a specific,
+correlated boost-plus-forward-limit structure, not because two particles move and two stay put.
+Generalizing this correctly to $n=5$ (where ``holding $t$ fixed'' must mean something precise with
+five momenta) is a genuine modeling choice, not resolved in the literature for $n\geq5$, and there
+is no evident reason to expect a unique correct choice.
+
+\section{Three families of \texorpdfstring{$n=5$}{n=5} Regge trajectories}
+\label{sec:families}
+
+We constructed three qualitatively distinct families, each validated independently (massless
+momenta, exact momentum conservation, and an explicit classification of which of the ten pairwise
+invariants grow vs.\ stay fixed, checked \emph{before} trusting any polarization construction, per
+Remark~\ref{rem:gaugebug}).
+
+\subsection{Family 1: hierarchical hard-trio / recoil-pair}
+\label{sec:family1}
+
+A ``hard'' cluster $\{1,2,3\}$ with $s_{12}\to\infty$, and a recoil pair $\{4,5\}$ boosted from a
+two-body decay of a system with momentum $P_{45}=-(p_1+p_2+p_3)$. The energy $E_3$ and angle
+$\theta(E)$ of $p_3$ relative to $p_1$ are tuned (via the same forward-limit mechanism as
+Section~\ref{sec:n4}) to hold \emph{both} $t_{13}:=-(p_1+p_3)^2$ and the recoil invariant mass
+$M_{45}^2:=-(p_1+p_2+p_3)^2$ fixed as $E\to\infty$. The direction of the $\{4,5\}\to$ two-body
+decay in the $P_{45}$ rest frame cannot be generic (oscillating, no clean power law) or exactly
+aligned with the boost axis (degenerate); a small fixed tilt angle $\varphi_0$ gives clean growth
+in all ten pairs. Resulting channel classification: growing
+$(1,2),(1,4),(1,5),(2,3),(3,4),(3,5)$ (all exactly $\sim E^2$); fixed $(1,3),(2,4),(2,5),(4,5)$
+(exact constants).
+
+\subsection{Family 2: two-scale hierarchical}
+\label{sec:family2}
+
+Identical construction to Family 1, except the recoil invariant mass is no longer held fixed but
+grows at the same rate as the hard channel, $M_{45}^2=m_0^2/x^2$ (writing $x=1/E$). The algebraic
+derivation of $\cos\theta,E_3$ that fixes $t_{13}$ and $M_{45}^2$ simultaneously is valid for
+\emph{any} value of $M_{45}^2$, including one depending on $x$, so no new derivation was needed.
+Resulting channel classification is qualitatively different: only $(1,3)$ (i.e.\ $t_{13}$) stays
+fixed; all other nine pairs, including three that were fixed in Family 1, now grow as $\sim E^2$.
+
+\begin{remark}[Relabelings are not new families]
+\label{rem:relabel}
+Every operator considered here is fully $S_5$-symmetrized (summed over all 120 permutations, as
+in~\cite{fivephotons}). Consequently, evaluating such an operator on a trajectory built by
+relabeling which trio is ``hard'' and which pair is ``recoil'' gives numerically \emph{identical}
+results to the original labeling --- it is not an independent check. A genuine second family
+requires a qualitatively different growing/fixed pattern, not merely a different assignment of
+particle labels to the same pattern; we verified this obstruction by direct analysis before
+building Family 2, and it is the reason Family 2 changes the scaling of $M_{45}^2$ rather than
+which particles are ``hard''.
+\end{remark}
+
+\subsection{Family 3: fast recoil growth}
+\label{sec:family3}
+
+Same construction again, with $M_{45}^2\sim m_0^4/x^4$ (growing \emph{faster} than the hard channel
+$s_{12}\sim1/x^2$) --- two powers of $x^{-1}$ beyond Family 2. (A first attempt to instead scale
+$t_{13}$ itself at an intermediate rate broke the parity of the kinematics, giving half-integer
+powers of $x$ incompatible with our exact-arithmetic machinery; this is consistent with the parity
+theorem of~\cite{fivephotons} and was diagnosed before any computation was attempted.) Channel
+classification: $(1,3)$ still fixed; $(1,2),(1,4),(1,5)$ grow as before ($\sim E^2$); but
+$(2,3),(2,4),(2,5),(3,4),(3,5),(4,5)$ now grow as $\sim E^4$ --- \emph{faster} than the nominally
+``hard'' channel itself.
+
+\section{Results}
+\label{sec:results}
+
+All computations use exact rational arithmetic (momenta and polarizations constructed in the
+quadratic extension $\Q(x)(S)$, $S^2=R(x)$ a rational function --- the only irrationality in the
+whole construction, since $S$ always appears linearly until squared --- followed by an exact
+Laurent series expansion in $x=1/E$; see~\cite{fivephotons}'s methodology and
+Section~\ref{sec:verification} below for the fast backend used). Growth rates are read off as the
+lowest surviving power of $x$ in this expansion, i.e.\ $x^{-k}$ corresponds to growth $E^k$.
+
+\subsection{Degree 9}
+
+Within Family 1, the unique degree-9 invariant (within the topologies known before the sandwich
+atom was added) grows as $E^8=s^4$, robust across four independent parameter configurations
+(exponent $4.00\pm0.01$ throughout). Once the sandwich atom $M^{ij}_{ab}$ is included, the true
+dimension of the degree-9 space is 3 (not 1), and an \emph{exact} rank/kernel computation on the
+Laurent coefficients (not a numerical extrapolation) proves that $s^3$ is the genuine floor of the
+\emph{entire} 3-dimensional space in this trajectory: no combination can do better, confirmed
+identically in two independent parameter configurations.
+
+\subsection{Degree 11, Family 1 alone}
+
+Within the (pre-sandwich) 3-dimensional space, an analogous exact argument shows $s^4$ is the
+floor: any combination with a component along the two leading directions leaves an $E^9$ residue
+that the third cannot cancel. Once the sandwich atom is included systematically, the dimension of
+degree 11 jumps to (at least) 15 (documented fully in~\cite{fivephotons}, whose exhaustive
+combinatorial sweep later confirmed this is exact within the four known atom types). An exact
+rank/kernel computation on this enlarged space reveals a \textbf{9-dimensional subspace} whose
+growth is $\leq E^4=s^2$ in Family 1 --- i.e.\ compatible with the conjectured CRG bound ---
+identically reproduced in a second independent parameter configuration.
+
+\subsection{Degree 11, two families combined}
+
+The 9-dimensional Family-1 subspace does \emph{not} survive Family 2: all nine directions fall to
+$x^{-11}$ ($s^{5.5}$), violating the bound by a wide margin. However, computing the combined kernel
+of both families' constraints directly (stacking the Laurent-coefficient rows of both trajectories
+and taking the exact nullspace) reveals a genuinely new, smaller \textbf{2-dimensional subspace}
+$U_1,U_2$ whose growth is $\leq s^2$ in \emph{both} Family 1 and Family 2 simultaneously ---
+verified by direct reconstruction (not just rank counting) and reproduced identically across two
+independent parameter configurations in each family. This is the first candidate in this project
+to survive more than one qualitatively distinct Regge trajectory.
+
+\subsection{Degree 11, three families combined: a null result}
+
+Family 3 kills $U_1,U_2$ outright: both fall to $x^{-22}$, the same generic order as any
+individual, unprotected basis element, violating the bound enormously. A single combination of
+$U_1,U_2$ can cancel that leading term, but would then need to independently satisfy roughly 18
+more order-by-order constraints using zero remaining degrees of freedom --- there is no structural
+reason to expect this, and we did not pursue the (rapidly growing) computational cost of checking
+it exhaustively.
+
+Subsequently, a genuinely new atom (the ``triple field-strength sandwich'' $T$) was discovered,
+raising the degree-11 dimension from 15 to exactly 16~\cite{fivephotons}. We repeated the
+combined-family analysis on this enlarged space. Restricting to Families 1+2, the kernel grows
+from dimension 2 to \textbf{dimension 3}: the new direction $U_3$ has a nonzero coefficient of the
+$T$-based basis element, confirming it is genuinely new, not a repackaging of $U_1,U_2$. But $U_3$
+also falls at $x^{-22}$ in Family 3, exactly like $U_1,U_2$.
+
+To settle this definitively rather than checking individual candidates one at a time, we computed
+the combined kernel of \emph{all three} families directly on the complete 16-dimensional space (31
+constraint rows: 6 from Family 1, 7 from Family 2, 18 from Family 3, exact rational arithmetic
+throughout). The result: \textbf{rank exactly 16, kernel exactly $\{0\}$}. No combination of any of
+the sixteen known degree-11 building blocks satisfies $\leq s^2$ in all three trajectory families
+simultaneously. This was checked at two independent truncation orders for Family 3 ($N=30,45$),
+with identical coefficients across the entire range of orders used --- the numerical stability
+required before trusting a high-order Laurent expansion.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}p{3.2cm} p{2.6cm} p{2.6cm} p{2.6cm}@{}}
+\hline
+& Family 1 & Families 1+2 & Families 1+2+3 \\
+\hline
+Degree 9 (dim.\ 3, exact) & floor $s^3$ & --- & --- \\[2pt]
+Degree 11, 15 known atoms & subspace dim.\ 9, $\leq s^2$ & subspace dim.\ 2, $\leq s^2$ & \\[2pt]
+Degree 11, $+T$ atom (dim.\ 16) & --- & subspace dim.\ 3, $\leq s^2$ & \textbf{kernel $=\{0\}$} \\
+\hline
+\end{tabular}
+\caption{Summary of the degree-9/11 Regge-growth search. Each column to the right imposes the
+bound in one additional family simultaneously; the rightmost result is exact and definitive within
+the 16-dimensional space explored.}
+\end{table}
+
+\section{Verification methodology}
+\label{sec:verification}
+
+Beyond the gauge-reference bug of Remark~\ref{rem:gaugebug} and the relabeling non-issue of
+Remark~\ref{rem:relabel}, two further real errors were caught and corrected:
+
+\begin{itemize}
+\item A first implementation of the fast Laurent-series backend (built after benchmarking showed
+sympy's expression-tree overhead, not the underlying arithmetic, was the bottleneck: multiplying
+and truncating a series 2000 times took 106s in sympy vs.\ 1.6s with plain \texttt{Fraction}
+arithmetic) truncated the high-order end of each series after every multiplication, which is
+\emph{incorrect} for Laurent series with negative orders: a discarded high-order term can re-enter
+the window of interest after multiplying by a sufficiently negative-order factor later. Caught by a
+100-case randomized test against sympy; fixed by never truncating until the final read-out.
+\item Re-deriving Family 2 with the fast backend produced mismatches against the (already-trusted)
+sympy reference. Diagnosis: the chosen parameters left an uncancelled $\sqrt3$ in the
+\emph{individual} (pre-symmetrization) polarizations, which only cancels after summing over the
+full $S_5$ orbit; the fast backend's coefficient-conversion routine used Python's \texttt{int()} on
+a sympy expression, which silently truncates an irrational like $\sqrt3$ to $1$ instead of raising
+an error. Fixed two ways: the conversion routine now requires an exact integer numerator and
+denominator and raises an explicit error otherwise; and the Family 2 parameters were changed to
+values keeping $\sqrt{R(x)}$ exactly rational throughout, removing the irrationality at its source.
+\end{itemize}
+
+As with the companion note, this track record is informative but does not substitute for
+independent external verification.
+
+\section{Discussion: what this means}
+\label{sec:discussion}
+
+Four structurally different attempts to find a degree-11 candidate compatible with CRG at $n=5$
+--- three qualitatively distinct trajectory families, and an enlarged 16-dimensional search space
+including a genuinely new atom --- all fail in the same qualitative way: candidates that survive
+some subset of the tests are killed by the next, and the combined constraint across everything
+tried is $\{0\}$. We think this pattern is more consistent with \emph{the definition of the limit
+being wrong} than with \emph{the search being incomplete}, though we cannot rule out the latter
+(see the caveats below).
+
+This connects back to the two-problem split made at the start of this project (see the
+project notes): deriving CRG from first principles (via the chaos bound, as
+in~\cite{chaosbound2021}) was judged out of reach for this project, so we took CRG as a given
+conjecture and attacked only its consequences (``Problem B''). What this note shows is that, at
+$n\geq5$, Problem B does not cleanly separate from Problem A the way it does at $n=4$: one cannot
+even state the bound to be checked without first answering a scaled-down version of the
+holographic question --- which kinematic regime is the one in which a causality/chaos-bound
+argument would actually constrain growth to $s^2$ at $n\geq5$. That is a real open problem, and we
+do not believe it can be resolved by further search within the family of trajectories explored
+here.
+
+\begin{remark}[Honest caveats]
+This conclusion depends on assumptions we have not independently verified: (i) that the CRG bound,
+if it generalizes to $n\geq5$ at all, keeps the same exponent $s^2$ (rather than some
+$n$-dependent power); (ii) that the three families explored, despite being qualitatively distinct,
+are representative of ``reasonable'' generalizations of the Regge limit, rather than three
+correlated failures of a single underlying modeling mistake; (iii) that degree 11 (rather than 13,
+15, \ldots) is the right place to look --- the parity theorem of~\cite{fivephotons} rules out even
+degrees, but says nothing about whether higher odd degrees behave differently.
+\end{remark}
+
+\subsection*{Open problem} What is the correct, physically motivated generalization of the
+classical Regge limit to $n\geq5$-particle scattering, and does a version of the Classical Regge
+Growth bound hold there? We do not know the answer, and we do not think it can be settled by more
+computation of the kind in this note --- it likely requires either a genuine extension of the
+holographic chaos-bound derivation of~\cite{chaosbound2021} to $n\geq5$ correlators, or an
+independent flat-space causality argument that does not go through holography at all.
+
+\subsection*{Acknowledgments}
+The author thanks Claude (Anthropic) for assistance with derivations, computational verification,
+and manuscript preparation.
+
+\begin{thebibliography}{9}
+
+\bibitem{cgghjm2019}
+S.~D.~Chowdhury, A.~Gadde, T.~Gopalka, I.~Halder, L.~Janagal, S.~Minwalla, \emph{Classifying and
+constraining local four photon and four graviton $S$-matrices}, JHEP \textbf{02} (2020) 114;
+arXiv:1910.14392.
+
+\bibitem{chaosbound2021}
+D.~Chandorkar, S.~D.~Chowdhury, S.~Kundu, S.~Minwalla, \emph{Bounds on Regge growth of flat space
+scattering from bounds on chaos}, arXiv:2102.03122.
+
+\bibitem{delduca1993}
+V.~Del~Duca, \emph{Parke-Taylor amplitudes in the multi-Regge kinematics}, Phys.\ Rev.\ D
+\textbf{48} (1993) 5133; arXiv:hep-ph/9304259.
+
+\bibitem{fivephotons}
+M.~Baca, \emph{The multilinear gauge-invariant operator basis for five massless photons:
+representation theory, invariant ring, and a complete low-degree classification}, preprint (2026);
+\url{https://doi.org/10.5281/zenodo.22819347}.
+
+\end{thebibliography}
+
+\end{document}
