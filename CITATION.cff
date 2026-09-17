@@ -6,6 +6,14 @@ authors:
   - family-names: "Baca"
     given-names: "Martín"
 repository-code: "https://github.com/martinbacaia/crg-open-problem-n5"
+doi: 10.5281/zenodo.22820411
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.22820411"
+    description: "Concept DOI — always resolves to the latest version."
+  - type: doi
+    value: "10.5281/zenodo.22820412"
+    description: "Version DOI for v1.0, the first archived preprint."
 abstract: >
   The Classical Regge Growth (CRG) conjecture is well-defined at n=4 but its generalization to
   n>=5 particles is genuinely ambiguous, with no definition in the literature. Using the
@@ -28,4 +36,5 @@ preferred-citation:
     - family-names: "Baca"
       given-names: "Martín"
   year: 2026
+  doi: 10.5281/zenodo.22820412
   notes: "Preprint, not yet peer-reviewed. See paper/crg-open-problem-n5.pdf."

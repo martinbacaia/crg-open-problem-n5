@@ -1,5 +1,7 @@
 # What is the classical Regge limit for n≥5 particles?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22820411.svg)](https://doi.org/10.5281/zenodo.22820411)
+
 **Status: preprint, not peer-reviewed.** This note reports a negative/exploratory result and an
 open problem, not a resolved theorem. See the disclaimer on the first page of the paper. Feedback,
 corrections, and criticism are genuinely welcome — please open an issue.
